@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>Secret</title>
+</head>
+<body>
+  <h2 style="text-align: center;">
+    Введите данные
+  </h2>
+  Логин <input type="text" id="name"></br>
+  Пароль <input type="text" id="password"></br>
+  <button onclick="checkData()">Войти</button>
+
+   <p id="error"></p>
+
+<script>
+        function checkData() {
+            const name = document.getElementById("name").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Допустимые пары и страницы
+            const pages = {
+                "123 456": "uve.html",
+                "456 123": "page3.html",
+                "345 214": "page4.html",
+                "234 513": "page5.html"
+            };
+
+            const key = name + " " + password;
+
+            if (pages[key]) {
+                // Данные совпали — переходим на нужную страницу
+                window.location.href = pages[key];
+            } else {
+                // Совпадения нет
+                document.getElementById("error").textContent =
+                    "Введенные данные не найдены.";
+            }
+        }
+    </script>
+
+</body>
+</html>
