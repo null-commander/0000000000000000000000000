@@ -1,27 +1,154 @@
 <!DOCTYPE html>
-
 <html lang="ru">
+
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="styles/style.css"/>
-  <title>Secret</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 360px;
+            padding: 40px;
+
+            background: #878787;
+            color: #000;
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin: 0 0 30px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 500;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+
+            border: 1px solid #bbb;
+            border-radius: 4px;
+
+            background: #b3b3b3;
+            color: #000;
+            font-size: 15px;
+            outline: none;
+
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #000;
+        }
+
+        button {
+            width: 100%;
+            height: 44px;
+            margin-top: 5px;
+
+            border: 1px solid #000;
+            border-radius: 4px;
+
+            background: #000;
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        #error {
+            min-height: 18px;
+            margin: 15px 0 0;
+
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 24px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h2 style="text-align: center;">
-    Введите данные
-  </h2>
-  Логин <input type="text" id="name"></br>
-  Пароль <input type="text" id="password"></br>
-  <button onclick="checkData()">Войти</button>
 
-   <p id="error"></p>
+    <div class="container">
 
-<script>
+        <h2>Введите данные</h2>
+
+        <div class="field">
+            <label for="name">Логин</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Введите логин"
+                autocomplete="username"
+            >
+        </div>
+
+        <div class="field">
+            <label for="password">Пароль</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Введите пароль"
+                autocomplete="current-password"
+            >
+        </div>
+
+        <button onclick="checkData()">Войти</button>
+
+        <p id="error"></p>
+
+    </div>
+
+    <script>
         function checkData() {
             const name = document.getElementById("name").value.trim();
             const password = document.getElementById("password").value.trim();
 
-            // Допустимые пары и страницы
             const pages = {
                 "123 456": "uve.html",
                 "456 123": "fier.html",
@@ -32,14 +159,18 @@
             const key = name + " " + password;
 
             if (pages[key]) {
-                // Данные совпали — переходим на нужную страницу
                 window.location.href = pages[key];
             } else {
-                // Совпадения нет
                 document.getElementById("error").textContent =
                     "Введенные данные не найдены.";
             }
         }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkData();
+            }
+        });
     </script>
 
 </body>
