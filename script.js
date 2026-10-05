@@ -6,7 +6,8 @@ function checkData() {
         "123 456": "uve.html",
         "456 123": "fier.html",
         "345 214": "frida.html",
-        "234 513": "hildred.html"
+        "234 513": "hildred.html",
+	"234 235": "rikrol.html"
     };
 
     const key = name + " " + password;
